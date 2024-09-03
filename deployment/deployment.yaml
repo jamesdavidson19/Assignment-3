@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: assignment-3
+spec:
+  type: LoadBalancer
+  selector:
+    service: assignment-3
+  ports:
+  - name: "5153"
+    protocol: TCP
+    port: 5153
+    targetPort: 5153
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: assignment-3
+  labels:
+    name: assignment-3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      service: assignment-3
+  template:
+    metadata:
+      labels:
+        service: assignment-3
+    spec:
+      containers:
+      - name: assignment-3
+        image: 799342885770.dkr.ecr.us-east-1.amazonaws.com/assignment-3:10
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          httpGet:
+            path: /health_check
+            port: 5153
+          initialDelaySeconds: 5
+          timeoutSeconds: 2
+        readinessProbe:
+          httpGet:
+            path: "/readiness_check"
+            port: 5153
+          initialDelaySeconds: 5
+          timeoutSeconds: 5
+        envFrom:
+        - configMapRef:
+            name: configmap.yaml
+        env:
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: <NAME OF THE Secret>
+              key: <THE KEY FROM Secret WHICH has THE ENCODED PASSWORD>
+      restartPolicy: Always
+
+      # test 1
