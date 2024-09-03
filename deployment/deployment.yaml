@@ -51,8 +51,8 @@ spec:
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: <NAME OF THE Secret>
-              key: <THE KEY FROM Secret WHICH has THE ENCODED PASSWORD>
+              name: jddb-secret
+              key: DB_PASSWORD
       restartPolicy: Always
 
       # test 1
