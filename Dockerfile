@@ -10,7 +10,7 @@ RUN pip install -r requirements.txt
 
 ENV DB_USERNAME="mypassword" 
 ENV DB_PASSWORD="jdavidson"
-ENV DB_HOST="192.168.65.3" 
+ENV DB_HOST="192.168.42.46" 
 ENV DB_PORT="5433"
 ENV DB_NAME="jddatabase"
 
@@ -18,3 +18,4 @@ COPY ./app .
 
 CMD python app.py
 
+# update

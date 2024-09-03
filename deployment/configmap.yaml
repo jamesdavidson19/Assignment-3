@@ -3,7 +3,7 @@ kind: ConfigMap
 metadata:
   name: jd-configmap
 data:
-  DDB_USERNAME: jddatabase
-  DB_USER: jdavidson
-  DB_HOST: postgresql-service
-  DB_PORT: 5432
+  DB_NAME: "jddatabase"
+  DB_USERNAME: "jdavidson"
+  DB_HOST: "postgresql-service"
+  DB_PORT: "5432"
